@@ -13,7 +13,7 @@ RUN npm install
 # Copy the rest of the application files
 COPY . .
 
-EXPOSE 8000
+EXPOSE 8080
 
 RUN npx prisma generate
 
