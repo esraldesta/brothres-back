@@ -1,0 +1,36 @@
+### create blog
+POST  http://[::1]:8000/categories/create-category  HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTczMzE0MjI0OSwiZXhwIjoxNzMzMTQyMzY5fQ.pfkOaUHloNIktGcuXicqS3wK3W4GFmTzND7DF_yM7OM
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Understanding NestJS Morepo",
+  "description": "<h1>NestJS Monorepos</h1><p>Learn how to manage multiple projects in a single codebase using <strong>NestJS</strong> monorepos.</p>"
+}
+
+
+### get blos list
+GET  http://[::1]:8000/blogs/list?page=1&pageSize=1 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTczMjEwNjQyOSwiZXhwIjoxNzMyMTA4ODI5fQ.3srdRkGG7XPiYiaUQfRT7RaoVdq2BnGTfpEd_k7eNNM
+
+
+###
+PATCH   http://[::1]:8000/categories/1/follow HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTczMzE0ODA2OCwiZXhwIjoxNzMzMTQ4MTg4fQ.9b0d_Q3Y4A2DK0RfCqDUjWMkatkkm9Kw6JF7D0Z_4jo
+
+
+###
+PATCH   http://[::1]:8000/categories/1/like HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTczMzE0ODIwNiwiZXhwIjoxNzMzMTQ4MzI2fQ.6EoN36kd16Iq7P-UxqvLtRhbS27cpiEM5-1hVkKO3rQ
+
+
+###
+POST    http://[::1]:8000/categories/3/comment HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTczMzE0OTI4NSwiZXhwIjoxNzMzMTQ5NDA1fQ.R81W3fc2sr0006k8uYWQZZSXEuun3Ir6uAKSKfFEI00
+Content-Type: application/json
+
+{
+  "parentId": 1,
+  "content": "Hi there"
+}

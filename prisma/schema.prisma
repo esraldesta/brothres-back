@@ -1,0 +1,270 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                Int      @id @default(autoincrement()) // auto-increment primary key
+  userName          String   @unique
+  // password                  String?
+  password          String
+  //? why this are optional
+  // firstName                 String?
+  // lastName                  String?
+  // nickName                  String?
+  firstName         String
+  lastName          String
+  nickName          String
+  sex               String
+  languages         String[]
+  languagesToLearn  String[] @default([])
+  // languagesWishToLearn      String[]   @db.StringArray
+  dob               DateTime
+  email             String   @unique
+  //not in sign
+  bio               String?
+  image             String?
+  country           String
+  state             String
+  city              String?
+  phoneNumber       String?
+  telegramUserName  String?
+  facebookId        String?
+  instagramUserName String?
+  vkId              String?
+  weChatId          String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @default(now()) @updatedAt
+  referalId         String?
+  //!Edit this
+  myReferalId       String?
+  refreshToken      String?
+  role              Role     @default(USER)
+
+  // userRoleMappings          UserRoleMapping[]
+  blogs                Blog[]
+  // referals                  Referals?
+  // userReferals              Referals[] @relation("UserReferals", fields: [id], references: [referalUserId])
+  Blogs                Blogs[]
+  Comments             Comments[]
+  BlogReaction         BlogReaction[]
+  UserActivity         UserActivity[]
+  BlogCategory         BlogCategory[]
+  CateGoryMembers      CateGoryMembers[]
+  CateGoryFollowers    CateGoryFollowers[]
+  CateGoryContributors CateGoryContributors[]
+  CateGoryLikes        CateGoryLikes[]
+  CateGoryComments     CateGoryComments[]
+}
+
+enum Sex {
+  Male
+  Female
+}
+
+enum Role {
+  ADMIN
+  MODERATOR
+  USER
+}
+
+model Blog {
+  id         Int      @id @default(autoincrement())
+  title      String   @unique
+  content    String
+  authorId   Int
+  tags       String[]
+  references String[]
+  image      String
+  imageName  String?
+  thumbnail  String?
+  blogType   BlogType
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+  author     User     @relation(fields: [authorId], references: [id])
+
+  @@index([authorId])
+}
+
+model Blogs {
+  id         Int      @id @default(autoincrement())
+  title      String   @unique
+  content    String
+  authorId   Int
+  tags       String[]
+  references String[]
+  image      String?
+  videoLink  String?
+  blogType   BlogType @default(Blog)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+
+  Comments     Comments[]
+  BlogReaction BlogReaction[]
+  //relations
+  author       User           @relation(fields: [authorId], references: [id])
+
+  @@index([authorId])
+}
+
+enum BlogType {
+  VBlog
+  Blog
+}
+
+model Comments {
+  id        Int      @id @default(autoincrement())
+  content   String
+  authorId  Int
+  blogId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  // Relations
+  author    User     @relation(fields: [authorId], references: [id])
+  blog      Blogs    @relation(fields: [blogId], references: [id], onDelete: Cascade)
+}
+
+model BlogReaction {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  blogId    Int
+  reaction  Reaction
+  createdAt DateTime @default(now())
+
+  // Relations
+  user User  @relation(fields: [userId], references: [id])
+  blog Blogs @relation(fields: [blogId], references: [id], onDelete: Cascade)
+}
+
+enum Reaction {
+  LIKE
+  DISLIKE
+}
+
+// model UserActivity {
+//   id        Int      @id @default(autoincrement())
+//   userId    Int
+//   date      String?
+//   createdAt DateTime @default(now())
+// }
+
+model UserActivity {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  trackKey  String
+  //!remove optional button
+  date      String?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([userId, trackKey, date])
+}
+
+model BlogCategory {
+  id                   Int                    @id @default(autoincrement())
+  name                 String
+  description          String
+  managerId            Int
+  status               CategoryStatus? // for root categories  
+  parents              BlogCategoryRelation[] @relation("ParentCategories")
+  BlogCategoryRelation BlogCategoryRelation[]
+  user                 User                   @relation(fields: [managerId], references: [id])
+  CateGoryMembers      CateGoryMembers[]
+  CateGoryFollowers    CateGoryFollowers[]
+  CateGoryContributors CateGoryContributors[]
+  createdAt            DateTime               @default(now())
+  CateGoryLikes        CateGoryLikes[]
+  CateGoryComments     CateGoryComments[]
+}
+
+model BlogCategoryRelation {
+  id       Int            @id @default(autoincrement())
+  childId  Int
+  parentId Int
+  status   CategoryStatus @default(PENDING)
+
+  child     BlogCategory @relation("ParentCategories", fields: [childId], references: [id])
+  parent    BlogCategory @relation(fields: [parentId], references: [id])
+  createdAt DateTime     @default(now())
+
+  @@unique([childId, parentId])
+}
+
+enum CategoryStatus {
+  ACCEPTED
+  PENDING
+}
+
+model CateGoryMembers {
+  id         Int @id @default(autoincrement())
+  userId     Int
+  categoryId Int
+
+  user         User         @relation(fields: [userId], references: [id])
+  blogCategory BlogCategory @relation(fields: [categoryId], references: [id])
+  createdAt    DateTime     @default(now())
+
+  @@unique([userId, categoryId])
+}
+
+model CateGoryFollowers {
+  id         Int @id @default(autoincrement())
+  userId     Int
+  categoryId Int
+
+  user         User         @relation(fields: [userId], references: [id])
+  blogCategory BlogCategory @relation(fields: [categoryId], references: [id])
+  createdAt    DateTime     @default(now())
+
+  @@unique([userId, categoryId])
+}
+
+model CateGoryContributors {
+  id         Int @id @default(autoincrement())
+  userId     Int
+  categoryId Int
+
+  user         User         @relation(fields: [userId], references: [id])
+  blogCategory BlogCategory @relation(fields: [categoryId], references: [id])
+  createdAt    DateTime     @default(now())
+
+  @@unique([userId, categoryId])
+}
+
+model CateGoryLikes {
+  id           Int          @id @default(autoincrement())
+  userId       Int
+  categoryId   Int
+  createdAt    DateTime     @default(now())
+  user         User         @relation(fields: [userId], references: [id])
+  blogCategory BlogCategory @relation(fields: [categoryId], references: [id])
+
+  @@unique([userId, categoryId])
+}
+
+model CateGoryComments {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  content    String
+  parentId   Int? // Make it optional, as not all comments will have a parent
+  categoryId Int
+  createdAt  DateTime @default(now())
+
+  user         User         @relation(fields: [userId], references: [id])
+  blogCategory BlogCategory @relation(fields: [categoryId], references: [id])
+
+  parentComment CateGoryComments? @relation("CommentReplies", fields: [parentId], references: [id])
+
+  replies CateGoryComments[] @relation("CommentReplies")
+}

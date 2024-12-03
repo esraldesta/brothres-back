@@ -1,0 +1,4 @@
+### GET REQUEST
+GET http://[::1]:8000/user/founders?page=1&pageSize=1  HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTczMjQ2MjgxNywiZXhwIjoxNzMyNDY1MjE3fQ.xETVBiXuz_uCVB7jfK6O6v5byIf8FsjkxqjOLUWy5zc
+

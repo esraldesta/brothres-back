@@ -1,0 +1,62 @@
+### Post blog
+PATCH  http://[::1]:8000/blogs/15/edit HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImlhdCI6MTczMjI3Mjg2NCwiZXhwIjoxNzMyMjc1MjY0fQ.OX1sN5-B0_BkFyGfqCH2vUUrPc-v6P17pvcGTuNchYI
+
+{
+  "title": "here and there koo",
+  "content": "This blog post explains how decorators work in TypeScript...",
+  "image": ""
+}
+
+
+### delete blog
+DELETE http://[::1]:8000/blogs/15/delete HTTP/1.1
+Authorization: Beare  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImlhdCI6MTczMjI1NjU5OSwiZXhwIjoxNzMyMjU4OTk5fQ.R4Kb8RHMRdEulOBCwAJ7SocYHUuIteeSWdVr53fU2ss
+
+### get blog
+GET http://[::1]:8000/blogs/8 HTTP/1.1
+
+
+### patch like blog
+PATCH http://[::1]:8000/blogs/7/like HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImlhdCI6MTczMjI3Mjg2NCwiZXhwIjoxNzMyMjc1MjY0fQ.OX1sN5-B0_BkFyGfqCH2vUUrPc-v6P17pvcGTuNchYI
+
+
+### patch dislike blog
+PATCH http://[::1]:8000/blogs/7/dislike HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImlhdCI6MTczMjI3Mjg2NCwiZXhwIjoxNzMyMjc1MjY0fQ.OX1sN5-B0_BkFyGfqCH2vUUrPc-v6P17pvcGTuNchYI
+
+
+### get stat
+GET  http://[::1]:8000/blogs/list HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTczMjEwNjQyOSwiZXhwIjoxNzMyMTA4ODI5fQ.3srdRkGG7XPiYiaUQfRT7RaoVdq2BnGTfpEd_k7eNNM
+
+
+### get stat
+GET  http://[::1]:8000/blogs/7/reaction HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImlhdCI6MTczMjI3Mjg2NCwiZXhwIjoxNzMyMjc1MjY0fQ.OX1sN5-B0_BkFyGfqCH2vUUrPc-v6P17pvcGTuNchYI
+
+
+
+### get user bogs
+GET  http://[::1]:8000/blogs/list?page=1&pageSize=6 HTTP/1.1
+
+
+### create blog
+
+POST  http://[::1]:8000/blogs/write-blog HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTczMzEzOTc5NSwiZXhwIjoxNzMzMTM5OTE1fQ.fl7ZbqSj1G7Jpia4KABQoqegR1RupgROngshw0HoUwI
+
+{
+  "id": 1,
+  "title": "Understanding NestJS Monorepos",
+  "content": "<h1>NestJS Monorepos</h1><p>Learn how to manage multiple projects in a single codebase using <strong>NestJS</strong> monorepos.</p>",
+  "authorId": 1,
+  "tags": ["nestjs", "monorepo", "backend", "typescript", "architecture"],
+  "references": ["https://nestjs.com", "https://docs.nestjs.com/monorepo"],
+  "blogType": "Blog"
+}
+
+### GET 
+GET  http://[::1]:8000/blogs/search?query=gfgf HTTP/1.1

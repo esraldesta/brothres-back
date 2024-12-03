@@ -1,0 +1,44 @@
+### POST REQUEST
+POST http://[::1]:8000/auth/signup HTTP/1.1
+Content-Type: application/json
+
+{
+  "firstName": "smith",
+  "lastName": "smith",
+  "userName": "smith3",
+  "nickName": "smith",
+  "sex": "Female",
+  "languages": ["Engish", "French"],
+  "dob": "1996-11-19",
+  "email": "smith3@gmail.com",
+  "telegramUserName": "smith",
+  "phoneNumber": "0912334424",
+  "facebookId": "smith",
+  "instagramUserName": "smith",
+  "vkId": "smith",
+  "weChatId": "snith",
+  "country": "smith",
+  "state": "smith",
+  "city": "smith",
+  "password": "123dsagfgA!.dff"
+}
+
+### POST REQUEST
+POST http://[::1]:8000/auth/signin HTTP/1.1
+Content-Type: application/json
+
+{
+    "userName": "smith",
+    "password": "123dsagfgA!.dff"
+}
+
+### POST REQUEST
+POST http://[::1]:8000/auth/signin HTTP/1.1
+Content-Type: application/json
+
+{
+    "userName": "smith",
+    "password": "123dsagfgA!.dff"
+}
+
+

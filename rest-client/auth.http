@@ -1,0 +1,106 @@
+### POST REQUEST
+POST http://[::1]:8000/auth/signup HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstName": "smith",
+    "lastName": "smith",
+    "userName": "smith",
+    "nickName": "smith",
+    "sex": "Male",
+    "languages": [
+        "English",
+        "Spanish"
+    ],
+    "dob": "2001-01-23",
+    "email": "smith@gmail.com",
+    "telegramUserName": "smith",
+    "phoneNumber": "0912334424",
+    "facebookId": "smith",
+    "instagramUserName": "smith",
+    "vkId": "smith",
+    "weChatId": "snith",
+    "country": "smith",
+    "state": "smith",
+    "city": "smith",
+    "password": "123dsagfgA!.dff"
+}
+
+
+# {
+#     "firstName": "John",
+#     "lastName": "Doe",
+#     "nickName": "Johnny",
+#     "userName": "johnd",
+#     "languages": ["English", "Spanish"],
+#     "dob": "1990-01-01T00:00:00.000Z", 
+#     "email": "johnd@example.com",
+#     "telegramUserName": "john_telegram",
+#     "phoneNumber": "1234567890",
+#     "vkId": "john_vk",
+#     "facebookId": "john_fb",
+#     "weChatId": "john_wechat",
+#     "instagramUserName": "john_insta",
+#     "country": "USA",
+#     "state": "California",
+#     "password": "securePassword123!",
+#     "referalId": "ref123",
+#     "sex": "male",
+#     "role": "ADMIN"
+# }
+
+### POST REQUEST
+POST http://[::1]:8000/auth/signin HTTP/1.1
+Content-Type: application/json
+
+{
+    "userName": "smith",
+    "password": "securePassword123!"
+}
+
+### POST REQUEST
+POST http://[::1]:8000/auth/refresh HTTP/1.1
+Content-Type: application/json
+
+{
+    "refresh" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTczMzExOTgxNCwiZXhwIjoxNzMzNzI0NjE0fQ.a9KQ4dv8o9ydVtuWM6Js79uKJITqC701-oQ3kvW_Sb0"
+}
+
+### GET REQUEST
+GET http://[::1]:8000/auth/signout HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTczMzExOTgxNCwiZXhwIjoxNzMzNzI0NjE0fQ.a9KQ4dv8o9ydVtuWM6Js79uKJITqC701-oQ3kvW_Sb0
+
+
+
+
+
+
+
+
+
+### get stat
+GET  http://[::1]:8000/user/1 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTczMjEwNTAxMywiZXhwIjoxNzMyMTA3NDEzfQ.m1psl3DPg61ICblx4trywt4fcPHWl56w6XeSpq5S91E
+
+
+
+### patch delete post
+DELETE   http://[::1]:8000/blogs/1/delete HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTczMTc2NDgwOSwiZXhwIjoxNzMxNzY1MDQ5fQ._wMd3JDVJtxwTSXPyUIeV_cKenQfEdfdWDuK2wGJsVA
+
+
+### update bio
+POST http://[::1]:8000/user/update-bio HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTczMTg1NTAxNSwiZXhwIjoxNzMxODU3NDE1fQ.Xv-3jVrvypyPCe8eAlVU_20jrb_ZQ8ic1qxfoaS5MvQ
+
+{
+  "bio": "Hey there."
+}
+
+
+### get founders
+GET http://[::1]:8000/user/founders/1?page=1&pageSize=4 HTTP/1.1
+
+###
+GET http://[::1]:8000/blogs/11 HTTP/1.1
