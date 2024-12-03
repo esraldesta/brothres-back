@@ -15,12 +15,12 @@ COPY . .
 
 RUN npx prisma generate
 
-EXPOSE 8080
+EXPOSE 8000
 
 # Build the NestJS application
 RUN npm run build
 
-EXPOSE 8080
+EXPOSE 8000
 
 # Command to run the application
 CMD ["node", "dist/main"]
