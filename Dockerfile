@@ -13,9 +13,9 @@ RUN npm install
 # Copy the rest of the application files
 COPY . .
 
-EXPOSE 8080
-
 RUN npx prisma generate
+
+EXPOSE 8080
 
 # Build the NestJS application
 RUN npm run build
