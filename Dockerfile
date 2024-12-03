@@ -1,5 +1,5 @@
 # Use the official Node.js image as the base image
-FROM node:20
+FROM node:18-alpine AS base
 
 # Set the working directory inside the container
 WORKDIR /usr/src/app
@@ -15,12 +15,12 @@ COPY . .
 
 RUN npx prisma generate
 
+EXPOSE 8000
+
+ENV PORT=8000
+
 # Build the NestJS application
 RUN npm run build
-
-EXPOSE 3000
-
-ENV PORT=3000
 
 # Command to run the application
 CMD ["node", "dist/main"]
