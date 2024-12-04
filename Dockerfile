@@ -13,11 +13,7 @@ RUN npm install
 # Copy the rest of the application files
 COPY . .
 
-ENV DATABASE_URL=$DATABASE_URL
-
 RUN npx prisma generate
-
-RUN npx prisma db push
 
 # Build the NestJS application
 RUN npm run build
