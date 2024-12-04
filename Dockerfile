@@ -14,7 +14,7 @@ COPY package*.json ./
 RUN npm install -g @nestjs/cli
 
 # Installs only the dependencies and skips devDependencies.
-RUN npm install --omit=dev
+RUN npm install
 
 # Copy all the files to the container.
 COPY . .
