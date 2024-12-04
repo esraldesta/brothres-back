@@ -19,6 +19,7 @@ RUN npm install --omit=dev
 # Copy all the files to the container.
 COPY . .
 
+RUN npx prisma generate
 # Create a "dist" folder with the production build.
 #(Skip for Node.js Projects)
 RUN npm run build
