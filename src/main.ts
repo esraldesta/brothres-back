@@ -6,10 +6,8 @@ import { ConfigService } from '@nestjs/config';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
-  const configService = app.get(ConfigService);
-  const port = await configService.get<number>('PORT') || 8080;
   app.useGlobalFilters(new HttpExceptionFilter());
-  await app.listen(port);
+  await app.listen(parseInt(process.env.PORT) || 3000)
   app.useGlobalFilters(new HttpExceptionFilter());
 }
 bootstrap();
