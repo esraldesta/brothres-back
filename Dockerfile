@@ -18,8 +18,5 @@ RUN npx prisma generate
 # Build the NestJS application
 RUN npm run build
 
-# Expose the application port
-EXPOSE 8080
-
 # Command to run the application
 CMD ["node", "dist/main"]
