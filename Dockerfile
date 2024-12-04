@@ -18,7 +18,6 @@ RUN npx prisma generate
 # Build the NestJS application
 RUN npm run build
 
-RUN npx prisma db push
 # Expose the application port
 EXPOSE 3000
 
