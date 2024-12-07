@@ -1,5 +1,5 @@
 # Use the official Node.js image as the base image
-FROM node:18-alpine AS base
+FROM node:20
 
 # Set the working directory inside the container
 WORKDIR /usr/src/app
@@ -19,7 +19,7 @@ RUN npx prisma generate
 RUN npm run build
 
 # Expose the application port
-EXPOSE 8080
+EXPOSE 3000
 
 # Command to run the application
 CMD ["node", "dist/main"]
